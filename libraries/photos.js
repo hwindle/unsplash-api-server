@@ -15,10 +15,11 @@ const photoHandler = async (req, res) => {
   // get query parameter title
   const title = req.query.title;
 
-  const url = `https://api.unsplash.com/search/photos?page=1&query=${title}`;
+  const url = `https://api.unsplash.com/search/photos?page=1&query=${title}&client_id=${UNSPLASH_API_KEY}`;
 
   try {
-    const imgData = await superagent.get(url).set('Authorization', `Client-ID ${process.env.UNSPLASH_API_KEY}`);
+    // can also add to superagent (headers) .set('Authorization', `Client-ID ${process.env.UNSPLASH_API_KEY}`)
+    const imgData = await superagent.get(url);
     const catArray = imgData.results.map((cat) => new Photo(cat));
     res.status(200).send(catArray);
   } catch {
@@ -27,9 +28,9 @@ const photoHandler = async (req, res) => {
 };
 
 const randomPicHandler = async (req, res) => {
-  const url = `https://api.unsplash.com/photos/random`;
+  const url = `https://api.unsplash.com/photos/random?client_id=${UNSPLASH_API_KEY}`;
   try {
-    const imgData = await superagent.get(url).set('Authorization', `Client-ID ${process.env.UNSPLASH_API_KEY}`);
+    const imgData = await superagent.get(url);
     const photoObject = new Photo(imgData);
     res.status(200).send(photoObject);
   } catch {
