@@ -1,0 +1,26 @@
+{
+  "name": "unsplash-images-api",
+  "version": "1.0.0",
+  "description": "A Node, Express API to gather cat pictures.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hwindle/unsplash-api-server.git"
+  },
+  "author": "Hazel Windle",
+  "license": "GPL-2.0-only",
+  "bugs": {
+    "url": "https://github.com/hwindle/unsplash-api-server/issues"
+  },
+  "homepage": "https://github.com/hwindle/unsplash-api-server#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "superagent": "^8.0.9"
+  }
+}
