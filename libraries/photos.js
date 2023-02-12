@@ -1,5 +1,5 @@
 const superagent = require('superagent');
-
+require('dotenv').config();
 
 class Photo {
   constructor(oneImageObj) {
@@ -14,13 +14,14 @@ class Photo {
 const photoHandler = async (req, res) => {
   // get query parameter title
   const title = req.query.title;
-
-  const url = `https://api.unsplash.com/search/photos?page=1&query=${title}&client_id=${UNSPLASH_API_KEY}`;
+  console.log(title);
+  const key = process.env.UNSPLASH_API_KEY;
+  const url = `https://api.unsplash.com/search/photos?query=${title}&client_id=${key}`;
 
   try {
     // can also add to superagent (headers) .set('Authorization', `Client-ID ${process.env.UNSPLASH_API_KEY}`)
     const imgData = await superagent.get(url);
-    const catArray = imgData.results.map((cat) => new Photo(cat));
+    const catArray = await imgData.results.map((cat) => new Photo(cat));
     res.status(200).send(catArray);
   } catch {
     res.status(500).send('API fetching problem');
@@ -28,7 +29,9 @@ const photoHandler = async (req, res) => {
 };
 
 const randomPicHandler = async (req, res) => {
-  const url = `https://api.unsplash.com/photos/random?client_id=${UNSPLASH_API_KEY}`;
+  const key = process.env.UNSPLASH_API_KEY;
+  const url = `https://api.unsplash.com/photos/random?client_id=${key}`;
+  console.log('In random pics');
   try {
     const imgData = await superagent.get(url);
     const photoObject = new Photo(imgData);
