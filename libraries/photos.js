@@ -1,5 +1,7 @@
 const axios = require('axios');
 require('dotenv').config();
+// import server Error handler function
+const serverError = require('../handlers/500');
 
 class Photo {
   constructor(oneImageObj) {
@@ -27,7 +29,7 @@ const photoHandler = async (req, res) => {
       })
       .catch((err) => console.log(err));
   } catch {
-    res.status(500).send('API fetching problem');
+    serverError;
   }
 };
 
@@ -42,7 +44,7 @@ const randomPicHandler = async (req, res) => {
       return res.status(200).send(photoObject);
     }).catch((err) => console.log(err));
   } catch {
-    res.status(500).send('API fetching problem');
+    serverError;
   }
 };
 

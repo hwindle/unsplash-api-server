@@ -8,6 +8,7 @@ const { photoHandler, randomPicHandler } = require('./libraries/photos');
 // import middlewares
 const loggerMiddleWare = require('./middlewares/logger');
 const validateMiddleWare = require('./middlewares/validate');
+const notFound = require('./handlers/404');
 
 // start new express server
 const app = express();
@@ -33,4 +34,4 @@ app.get('/searchImage', validateMiddleWare, photoHandler);
 // Get 1 random image, e.g: url/randomImage 
 app.get('/randomImage', randomPicHandler);
 // a misstyped path.
-app.get('*', (req, res) => res.status(404).send('URL not found'));
+app.get('*', notFound);
