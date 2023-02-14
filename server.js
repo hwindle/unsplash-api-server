@@ -7,6 +7,7 @@ require('dotenv').config();
 const { photoHandler, randomPicHandler } = require('./libraries/photos');
 // import middlewares
 const loggerMiddleWare = require('./middlewares/logger');
+const validateMiddleWare = require('./middlewares/validate');
 
 // start new express server
 const app = express();
@@ -28,7 +29,7 @@ app.listen(PORT, () => {
 // A default message for the home route
 app.get('/', (req, res) => res.status(200).send('Home route'));
 // Get 10 images with the title query, e.g: url/searchImage?title=river
-app.get('/searchImage', photoHandler);
+app.get('/searchImage', validateMiddleWare, photoHandler);
 // Get 1 random image, e.g: url/randomImage 
 app.get('/randomImage', randomPicHandler);
 // a misstyped path.
