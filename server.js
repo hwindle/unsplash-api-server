@@ -9,6 +9,7 @@ const { photoHandler, randomPicHandler } = require('./libraries/photos');
 const loggerMiddleWare = require('./middlewares/logger');
 const validateMiddleWare = require('./middlewares/validate');
 const notFound = require('./handlers/404');
+const serverError = require('./handlers/500');
 
 // start new express server
 const app = express();
@@ -35,3 +36,5 @@ app.get('/searchImage', validateMiddleWare, photoHandler);
 app.get('/randomImage', randomPicHandler);
 // a misstyped path.
 app.get('*', notFound);
+
+app.use(serverError);
