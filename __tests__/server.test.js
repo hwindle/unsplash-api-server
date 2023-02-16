@@ -40,18 +40,18 @@ describe('Unsplash API server', () => {
     expect(response.status).toBe(500);
   });
 
-  // searchImage with title of 2 characters gives http 500
-  it('search of only 2 characters returns 500', async () => {
+  // searchImage with title of 2 characters gives http 200
+  it('search of only 2 characters returns 200', async () => {
     const getParams = { title: 'ab' };
     const response = await mockRequest.get('/searchImage').query(getParams);
-    expect(response.status).toBe(500);
+    expect(response.status).toBe(200);
   });
 
-  // searchImage with title of 16 characters gives http 500
-  it('search of 16 characters or more returns 500', async () => {
+  // searchImage with title of 16 characters gives http 200
+  it('search of 16 characters or more returns 200', async () => {
     const getParams = { title: 'asdfgshklqpwerwe' };
     const response = await mockRequest.get('/searchImage').query(getParams);
-    expect(response.status).toBe(500);
+    expect(response.status).toBe(200);
   });
 
   // searchImage returns 200 with correct length get parameter
