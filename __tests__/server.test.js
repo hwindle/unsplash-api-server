@@ -1,8 +1,8 @@
 // import the file to be tested
 const server = require('../server');
-// HTTP tester, similar to mocha or supertest
-const jest = require('jest');
-const mockRequest = jest(server.app);
+// supertest is a HTTP tester that works alongside jest 
+const supertest = require('supertest');
+const mockRequest = supertest(server.app);
 
 describe('Unsplash API server', () => {
   // async/await for network requests, or database
@@ -21,7 +21,7 @@ describe('Unsplash API server', () => {
 
   // bad method - post (not implemented on this app)
   it('/ incorrect method (post)', async () => {
-    const response = await mockRequest.post('unimplemented');
+    const response = await mockRequest.post('/unimplemented');
     expect(response.status).toEqual(404);
   });
 
@@ -60,7 +60,7 @@ describe('Unsplash API server', () => {
     const response = await mockRequest.get('/searchImage').query(getParams);
     expect(response.status).toBe(200);
     console.log(typeof response.body);
-    expect(typeof response.body).toEqual('array');
+    expect(typeof response.body).toEqual('object');
   });
 
 });

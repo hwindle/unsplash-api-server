@@ -39,4 +39,6 @@ app.get('*', notFound);
 
 app.use(serverError);
 
-module.exports = app;
+module.exports = {
+  app:app
+};
