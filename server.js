@@ -38,3 +38,5 @@ app.get('/randomImage', randomPicHandler);
 app.get('*', notFound);
 
 app.use(serverError);
+
+module.exports = app;
