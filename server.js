@@ -19,7 +19,7 @@ app.use(cors());
 // use the logger middleware at the application level
 app.use(loggerMiddleWare);
 
-const PORT = process.env.PORT || 3058;
+const PORT = process.env.PROD_PORT;
 app.listen(PORT, () => {
   console.log('I am listening... :-)  ', PORT);
 });
